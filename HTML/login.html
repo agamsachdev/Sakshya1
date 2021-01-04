@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+   <script src="login.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/uplift.html">Logo</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <section class="left">
+            <div class="illustration"></div>
+        </section>
+        <section class="right">
+            <div class="form-container">
+                <h1>Welcome back</h1>
+                <!-- Form -->
+                <form class="form" id="form">                    
+                    <div class="input-container">
+                        <label for="firstName">Email</label>
+                        <input class="input" type="email" name="email" id="lemail" required>
+                        <p class="error">* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra elit scelerisque lorem id at sed. Iaculis congue sociis vel egestas aliquam dui, sit facilisis mauris.</p>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="password">Password</label>
+                        <div class="input password-container">
+                            <input id="passwordInput" class="password-input" type="password" name="password" required>
+                            <img id="passwordToggle" class="eye-toggle-btn" src="../images/show.svg"> 
+                        </div>
+                        <p class="error">* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra elit scelerisque lorem id at sed. Iaculis congue sociis vel egestas aliquam dui, sit facilisis mauris.</p>
+                    </div>
+
+                    <a class="forgot-password" href="#">Forgot Password?</a>
+
+                    <button class="btn" type = "submit" onclick="validation()" id="btnlogin">Login</button>
+                </form>
+
+                <script src="sweetalert2.all.min.js"></script>
+
+                <script type="text/javascript">
+                    function validation(){
+
+                        var Email = 'agam.sachdev@gmail.com';
+                        var Password = 'sakshya';
+
+                        var email = document.getElementsById('lemail').value;
+                        var password = document.getElementsById('passwordInput').value;
+
+                        if ((Email == email) && (Password == password)){
+                            Swal.fire(
+                            'Good job!',
+                            'You clicked the button!',
+                            'success'
+                            )
+                        }
+                        else {
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                            footer: '<a href>Why do I have this issue?</a>'
+                            })
+                        }
+                    }
+                
+                </script>
+
+                <h2>Don't have an account? <a href="sign_up.html">Sign Up</a></h2>
+
+                <div class="divider">
+                    <div class="line"></div>
+                    <span>OR</span>
+                    <div class="line"></div>
+                </div>
+
+                <div class="social-btns">
+                    <div class="btn">
+                        <div class="google icons"></div>
+                        <a href="https://accounts.google.com/Login" target = "blank">
+                        <img src="https://img-authors.flaticon.com/google.jpg" height = "30"/> </a>
+                    </div>
+                    
+                    <div class="btn">
+                        
+                        <div class="facebook icons">
+                        </div>
+                        <a href="https://www.facebook.com/" target = "blank">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAaVBMVEU6VZ////81Up0yT5xgc61+jbsvTZyXo8hFXaOirM0nSJmlrs7O1OUkRpkfQ5c1UZ1oerKHlcDp6/M9WKHHzeHV2ulxgravt9Td4Ozl6PGDkb7ByN5YbatQZ6j29/q3v9h2hrhMY6aQnMSsAnKHAAAC70lEQVR4nO3caXLiMBRFYdoihhhsQ5jDlPT+F9mdqv7bRrYQ7z7XOQug9BUWHiQzmRARERERERERERERERERqVe0IZQPCtaDHFwo62Yz/VrP3jtbrH0Sy7rYH46/YtpV1oPtX6jCbBel+2npThjq/Taa51AYmrdTH583YdHsP/r5nAnLTa/j05+w+ezv8yRsq/MQoB9hmPeegb6E5eU2DOhFWK4G+rwIw3CgD2G4Dge6ELaboXPQi7CJu4nwK6zvKUAHwvCVBHQgrFMmoQdh4jGqL2wviUB5YRP/uMKnsJ2mAtWF9XLkwjblcs2FsDqMXZh6LpQXhn06UFtYpZ7t5YX1wEczboTF/AlAaWFYP0OovPZU9pmGt9194W79sIq/Jt2uqqrytwbcxJ4NT9e6tR7soEIk8N749E2K7zjgubEe6dAi75yOboGxwrnTQ/RvRZTwIHy6e1SccF5Yj3N4UcJjbT3MhKKEh9J6mAlFCZWvyR4WJXxDqBxChPohRKgfQoT6IUSoH0KE+iFEqB9ChPqNQ1h0vKJcxWwt/aofvelsDFzNOlpECO9dH/DT+8ZUWMYgErNdfXuB8Ga7RPwCofHy2wuE59EfpQvbH9MXCNejF65st2q8QPhtu5Mhv/BmfE2TX/hhvGMqv3BpvBslv/BuvGUqv3A2+nloff+YX3gx3rmYX2j9CCC78Ga9NzO78GS9dTG7cDv679B8c2Z24e/R/9LsRy+8Wm/kzy60nobZhdb3TvmF9u8e5hYaP0p8gfB99PPQ/l2F3MKp+StDuYXWvuxC60eJ+YXm907ZhQJ/NlA+4d9ZOrrbH6WTzbyjmL+D/Oz6BNsl/H8V/y9E7TYpOz7BGveoceyn6QohQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLUDyFC/RAi1A8hQv0QItQPIUL9ECLs0R8aFUYEFLSeAgAAAABJRU5ErkJggg==" height = "30" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="login.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>
+

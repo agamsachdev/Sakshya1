@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Maven+Pro:wght@500&family=Roboto&display=swap" rel="stylesheet">
+    
+    <!-- firebase connection -->
+    
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/sign_up.css">
+    
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="../uplift.html">Logo</a>
+        </div>
+    </div>
+
+    <div class="main">
+        <section class="left">
+            <div class="illustration"></div>
+        </section>
+        <section class="right">
+            <div class="form-container">
+                <h1>Create a New Account</h1>
+                <!-- Form -->
+                <form class="form">
+                    <div class="name">
+                        <div class="input-container">
+                            <label for="firstName">First Name</label>
+                            <input class="input" type="text" name="firstName" id="firstName" placeholder="Enter your first name">
+				<small>Error msg</small>
+				<p class="error first-name-error">* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra elit scelerisque lorem id at sed. Iaculis congue sociis vel egestas aliquam dui, sit facilisis mauris.</p>
+                        </div>
+                        
+                        <div class="input-container">
+                            <label for="lastName">Last Name</label>
+                            <input class="input" type="text" name="lastName" id="lastName" placeholder="Enter your last name">		
+                            	<small>Error msg</small>
+				<p class="error last-name-error">* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra elit scelerisque lorem id at sed. Iaculis congue sociis vel egestas aliquam dui, sit facilisis mauris.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="email">Email</label>
+                        <input class="input" type="email" name="email" id="email" placeholder="Enter your email">
+			<small>Error msg</small>
+                        <p class="error">* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra elit scelerisque lorem id at sed. Iaculis congue sociis vel egestas aliquam dui, sit facilisis mauris.</p>
+                    </div>
+                    
+                    <div class="input-container">
+                        <label for="password">Password</label>
+                        <div class="input password-container">
+                            <input id="password" class="password-input" type="password" name="password-input" placeholder="Enter a password">
+                            <img id="passwordToggle" class="eye-toggle-btn" src="../images/show.svg">
+                        </div>
+                        <p class="error">* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra elit scelerisque lorem id at sed. Iaculis congue sociis vel egestas aliquam dui, sit facilisis mauris.</p>
+                    </div>
+
+			<div class="input-container">
+                        <label for="password">Confirm Password</label>
+                        <div class="input password-container">
+                            <input id="cpassword" class="password-input" type="password" name="password-input" placeholder="Confirm your password">
+                            <img id="passwordToggle" class="eye-toggle-btn" src="../images/show.svg">
+                        </div>
+			<small>Error msg</small>
+                        <p class="error">* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pharetra elit scelerisque lorem id at sed. Iaculis congue sociis vel egestas aliquam dui, sit facilisis mauris.</p>
+                    </div>
+
+                    <div class="terms-container">
+                        <label class="checkboxContainer">
+                            <input type="checkbox">
+                            <div class="checkmark"></div>
+                            I agree to all the <a href="#">Terms and Conditions</a>
+                        </label>
+                    </div>  
+
+                    <button class="btn" id="btnsignup">Sign Up</button>
+                </form>
+
+                <h2>Already have an account? <a href="login.html">Login</a></h2>
+            </div>
+        </section>
+    </div>
+	<script type="text/javascript">
+	const form = document.getElementById('form');
+	const firstName = document.getElementById('firstName');
+	const lastName = document.getElementById('lastName');
+	const email = document.getElementById('email');
+	const password = document.getElementById('password');
+	const cpassword = document.getElementById('cpassword');
+
+// add event
+
+	form.addEventListener('btsignup', (event)=> {
+	validate();
+	})
+
+	const isEmail = (email) => {
+	var atSymbol = email.indexOf("@");
+	if(atSymbol < 1) return false;
+	var dot = email.lastIndexOf('.');
+	if(dot <= atSymbol + 3) return false;
+	if(dot === email.length - 1) return false;
+	return true;
+	}	
+
+	
+
+	const validate = () => {
+	const firstName = firstName.value.trim();
+	const lastName = lastName.value.trim();
+	const email = email.value.trim();
+
+	if(firstName === '') {
+	setErrorMsg(firstName, 'First Name cannot be blank');}
+	else if(firstName <= 3) {
+	setErrorMsg(firstName, 'First Name cannot be less than 3 letters');}
+	else {
+	setSuccessMsg(firstName); }
+	
+	if(lastName === '') {
+	setErrorMsg(lastName, 'Last Name cannot be blank');}
+	else if(lastName <= 3) {
+	setErrorMsg(lastName, 'Last Name cannot be less than 3 letters');}
+	else {
+	setSuccessMsg(lastName); }	
+
+	if(email === '') {
+	setErrorMsg(email, 'Email cannot be blank');}
+	else if(!isEmail(email)) {
+	setErrorMsg(email, 'Not a valid Email');}
+	else {
+	setSuccessMsg(email); }
+
+	function setErrorMsg(input, errormsgs) {
+	const formControl = input.parentElement;
+	const small = formControl.querySelector('small');
+	formControl.className = "input-container error";
+	small.innerText = errormsgs;
+	}
+	 
+
+
+    <!-- Custom JavaScript -->
+    <!-- <script src="../js/sign_up.js"></script> -->
+    <script src="../js/app.js"></script>
+    
+</body>
+</html>
+
